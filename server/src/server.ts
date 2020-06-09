@@ -10,15 +10,19 @@ const users = [
 ]
 
 app.get('/users', (request, response) => {
-  console.log('Listagem de usuários');
+  const search = String(request.query.search);
 
-  return response.json(users);
+  const filteredUsers = search ? users.filter(user => user.includes(search)) : users;
+
+  return response.json(filteredUsers);
 });
 
 app.get('/users/:id', (request, response) => {
-  console.log('Listagem de usuários');
+  const id = Number(request.params.id);
 
-  return response.json(users);
+  const user = users[id];
+
+  return response.json(user);
 });
 
 app.post('/users', (request, response) => {
