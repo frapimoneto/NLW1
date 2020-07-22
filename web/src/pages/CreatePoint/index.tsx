@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
@@ -42,6 +42,8 @@ const CreatePoint = () => {
   const [selectedCity, setSelectedCity] = useState('0');
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+
+  const history = useHistory();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => { //retorna a posição do usuário com os dados do navegador
@@ -240,8 +242,8 @@ const CreatePoint = () => {
             {items.map(item => (
               <li
                 key={item.id}
-                onClick={() => handleSelectItem(item.id)}
-                className={selectedItems.includes(item.id) ? 'selected' : ''}
+                onClick={() => handleSelectItem(Number(item.id))}
+                className={selectedItems.includes(Number(item.id)) ? 'selected' : ''}
               >
                 <img src={item.image_url} alt={item.title} />
                 <span>{item.title}</span>
