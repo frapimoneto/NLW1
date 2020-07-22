@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "cors": "^2.8.5",
-    "knex": "^0.21.2"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.6"
-  }
-}
